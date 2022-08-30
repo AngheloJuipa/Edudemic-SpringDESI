@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<th:block th:include ="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+
+
+	<div class="container">
+	<form th:action="@{/calificacionesProfesor}" th:object="${calificacionProfesores}" method="POST">
+			<h1>Calificando a tu maestro</h1>	
+  
+
+  	 		<div class="form-outline mb-4">
+                <label class="form-label" for="lista">Estudiante</label> <select
+                    class="custom-select custom-select-sm " name="estudiante" id="lista">
+                    <option th:each="estudiante:${listaEstudiantes}" th:value="${estudiante.id}"
+                        th:text="${estudiante.nombres}+' '+ ${estudiante.apellidos}" />
+                </select>
+            </div>
+			<div class="form-outline mb-4">
+                <label class="form-label" for="lista">Profesor</label> <select
+                    class="custom-select custom-select-sm " name="profesor" id="lista">
+                    <option th:each="profesor:${listaProfesores}" th:value="${profesor.id}"
+                        th:text="${profesor.nombres}+' '+ ${profesor.apellidos}"/>
+                </select>
+            </div>
+	
+	
+			<small class="form-text text-danger" th:if="${#fields.hasErrors('actitud')}"
+					th:errors="*{actitud}"></small>
+			<div class="form-group">
+    		<label for="exampleFormControlTextarea1">Del 1 al 10 ¿Cuánto calificas su aptitud en clases?</label>
+    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="1" th:field="*{actitud}"></textarea>
+    		
+    		<small class="form-text text-danger" th:if="${#fields.hasErrors('ensenanza')}"
+					th:errors="*{ensenanza}"></small>
+			<div class="form-group">
+    		<label for="exampleFormControlTextarea1">Del 1 al 10 ¿Cuánto calificas su enseñanza en clases?</label>
+    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="1" th:field="*{ensenanza}"></textarea>
+    		
+    		<small class="form-text text-danger" th:if="${#fields.hasErrors('metodologia')}"
+					th:errors="*{metodologia}"></small>
+			<div class="form-group">
+    		<label for="exampleFormControlTextarea1">Del 1 al 10 ¿Cuánto calificas la metodologia que emplea en clases?</label>
+    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="1" th:field="*{metodologia}"></textarea>
+	
+   
+			<small class="form-text text-danger" th:if="${#fields.hasErrors('comentario')}"
+					th:errors="*{comentario}"></small>
+			<div class="form-group">
+    		<label for="exampleFormControlTextarea1">¿Qué opinas de tu profesor?</label>
+    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{comentario}"></textarea>
+			
+	<!-- Submit button -->
+			<br><br>
+			<button type="submit" class="btn btn-primary btn-block mb-4">Enviar</button>
+		
+--<th:block th:include ="fragments/footer"></th:block>
+    <th:block th:include ="fragments/scripts"></th:block>	
+	
+</body>
+</html>

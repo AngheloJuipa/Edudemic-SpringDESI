@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="fragments/head"></th:block>
+<meta charset="UTF-8">
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+
+	<div class="container">
+<form th:action="@{/retos}" th:object="${reto}" method="POST">
+<br></br>
+<h1 class="display-3">Añadir reto</h1>
+  <!-- Name input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="form4Example1" class="form-control" name="nombre" th:field="*{nombre}" />
+    <label class="form-label" for="form4Example1" >Nombre reto</label>
+  </div>
+
+	<div class="form-outline mb-4">
+				<input type="text" id="form6Example3" class="form-control"
+					name="nota" th:field="*{nota}" /> <label class="form-label"
+					for="form6Example3">Nota</label>
+		</div>
+
+	<div class="form-outline mb-4">
+				<input type="date" id="start" class="form-control"
+					value="2022-07-22" min="1990-01-01" max="2022-12-31" name="fechaLimite"
+					th:field="*{fechaLimite}"> <label class="form-label" for="start">Fecha Limite</label>
+			</div>
+			
+			<div class="form-outline mb-4">
+				<label class="form-label" for="lista">Mentoria</label> <select
+					class="custom-select custom-select-sm " name="mentoria" id="lista">
+					<option th:each="mentoria :${listaMentorias}" th:value="${mentoria.id}"
+						th:text="${mentoria.descripcion}" />
+				</select>
+			</div>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Registrar</button>
+    <br></br> <br></br>   <br></br> <br></br> 
+</form>
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

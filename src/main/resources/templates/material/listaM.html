@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<th:block th:include="fragments/head"></th:block>
+<meta charset="UTF-8">
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+
+	<div class="container">
+		<br></br>
+		<div class="card">
+			<div class="card-header">Listado de materiales</div>
+			<div class="card-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+
+							<th scope="col">Nombre</th>
+							<th scope="col">Descripción</th>
+							<th scope="col">Enlace</th>
+							<th scope="col">Descripcion de la mentoria</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="material:${materiales}">
+							<td th:text="${material.nombre}">Mark</td>
+							<td th:text="${material.descripcion}">Mark</td>
+							<td><a th:href="${material.enalce}" target="_blank">Ir a enlace</a></td>
+							<td th:text="${material.mentoria.descripcion}">Mark</td>
+							
+							
+								
+							
+							
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+		<br></br>
+	</div>
+
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>

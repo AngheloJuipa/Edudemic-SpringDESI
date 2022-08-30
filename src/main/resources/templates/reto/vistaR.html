@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<th:block th:include="fragments/head"></th:block>
+<meta charset="UTF-8">
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+
+	<div class="container">
+		<br></br>
+		<div class="card">
+			<div class="card-header">Listado de preguntas retos</div>
+			<div class="card-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+
+							<th scope="col">Descripcion</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pregunta:${preguntas}">
+							<td th:text="${pregunta.descripcion}">Mark</td>
+							<div class="form-outline mb-4">
+								<select
+									class="custom-select custom-select-sm " name="opcion" id="lista">
+									<option th:each="opcion :${listaOpciones}" th:value="${opcion.id}"
+										th:text="${curso.descripcion}" />
+								</select>
+							</div>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br></br>
+	</div>
+
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>

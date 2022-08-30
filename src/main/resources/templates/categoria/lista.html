@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+     <th:block th:include="fragments/navbar"></th:block>
+     <div class="container">
+     	<br></br>
+        <div class="card" style="max-width: 100%;">
+			<div class="card-header">Lista de categorias</div>
+			<div class="card-body">
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th>Nombre</th>
+							<th>Descripcion</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="categoria : ${categorias}">
+
+							<td th:text="${categoria.id}">1</td>
+							<td th:text="${categoria.nombre}">HAMP</td>
+							<td th:text="${categoria.descripcion}">HAMP</td>
+							
+							<td><a th:href="@{'/delete/' + ${categoria.id}}"
+								class="btn btn-danger">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+		</div>
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

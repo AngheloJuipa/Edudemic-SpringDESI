@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:include ="fragments/head"></th:block>
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+
+
+	<div class="container">
+	<form th:object="${'libro'}">
+			<h1>Detalles del libro</h1>	
+  
+  		<div class="card">
+			<div class="card-header">Datos del Libro</div>
+			<div class="card-body">
+				<table class="table table-striped">
+				
+
+
+				  <tr>
+                  <th> Profesor </th>
+                  <td th:text="${libro.autor}">Mark</td>
+                  </tr>
+                  
+                  <tr>
+                  <th> Descripcion </th>
+                  <td th:text="${libro.descripcion}">Mark</td>
+                  </tr>
+                  
+					
+				<tr>
+                  <th> Fecha </th>
+                  <td th:text="${libro.fPublicacion}">Mark</td>
+                  </tr>
+                  
+                  <tr>
+                  <th> Titulo </th>
+                  <td th:text="${libro.titulo}">Mark</td>
+                  </tr>
+					
+					 <tr>
+                  <th> Enlace </th>
+                  <td th:text="${libro.enlace}">Mark</td>
+                  </tr>
+                  	
+				</table>
+			</div>
+		</div>
+  		
+  		<br></br>
+  	 
+  		
+  		<br></br>
+ 
+    
+    
+    <p><a th:href="@{'/registro/calificacion/'+ ${libro.id}}"
+								class="btn btn-success">Calificar</a></p>
+
+
+			<br></br>
+			
+			
+			<div class="card">
+			<div class="card-header">Calificaciones</div>
+			<div class="card-body">
+			<table class="table table-striped">
+		
+  <thead>
+    <tr>
+      
+      <th scope="col">Estudiante</th>
+      <th scope="col">Libro</th>
+      <th scope="col">Estrellas</th>
+      <th scope="col">Comentarios</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="calificacion:${calificaciones}">
+      <td th:text="${calificacion.estudiante.nombres}">Mark</td>
+      <td th:text="${calificacion.libro.titulo}">Mark</td>
+      <td th:text="${calificacion.estrellas}">Otto</td>
+      <td th:text="${calificacion.comentario}">Otto</td>
+    </tr>
+   
+  </tbody>
+</table>
+			
+			
+		</form>
+	
+	
+	
+	
+	
+    
+    
+--<th:block th:include ="fragments/footer"></th:block>
+    <th:block th:include ="fragments/scripts"></th:block>	
+	
+</body>
+</html>

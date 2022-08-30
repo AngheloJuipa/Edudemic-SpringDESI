@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="fragments/head"></th:block>
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+
+	<div class="container">
+		<form th:action="@{/foros}" th:object="${foro}" method="POST">
+			<h1>NUEVO FORO</h1>
+
+			<div class="form-outline mb-4">
+				<input type="text" id="form6Example3" class="form-control"
+					name="titulo" th:field="*{titulo}" /> <label class="form-label"
+					for="form6Example3">Titulo</label> <small
+					class="form-text text-danger"
+					th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small>
+			</div>
+					<div th:if="${mensaje}" class="alert alert-danger">
+					<p th:text="${mensaje}"> </p> </div>
+					<div th:if="${mensaje2}" class="alert alert-danger">
+					<p th:text="${mensaje2}"> </p> </div>
+
+
+			<div class="form-outline mb-4">
+				<input type="date" id="start" class="form-control"
+					value="2022-07-22" min="1990-01-01" max="2022-12-31" name="fecha"
+					th:field="*{fPublicacion}"> <label class="form-label"
+					for="start">Fecha Publicacion</label> <small
+					class="form-text text-danger"
+					th:if="${#fields.hasErrors('fPublicacion')}"
+					th:errors="*{fPublicacion}"></small>
+			</div>
+
+
+			<div class="form-outline mb-4">
+				<label class="form-label" for="lista">Estudiante</label> <select
+					class="custom-select custom-select-sm " name="estudiante" id="lista">
+					<option th:each="estudiante :${listaEstudiantes}"
+						th:value="${estudiante.id}" th:text="${estudiante.nombres}" />
+				</select>
+			</div>
+
+			<div class="form-outline mb-4">
+				<input type="text" id="form6Example3" class="form-control"
+					name="descripcion" th:field="*{descripcion}" /> <label
+					class="form-label" for="form6Example3">Descripcion</label> <small
+					class="form-text text-danger"
+					th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
+			</div>
+
+
+			<!-- Submit button -->
+			<button type="submit" class="btn btn-primary btn-block mb-4">Crear</button>
+
+			<br></br>
+		</form>
+
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

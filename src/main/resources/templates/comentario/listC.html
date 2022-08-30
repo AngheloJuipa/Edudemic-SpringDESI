@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<th:block th:include="fragments/head"></th:block>
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="card" style="max-width: 100%;">
+		<div class="card-header">Comentarios</div>
+		<div class="card-body">
+
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th>Hora Publicacion</th>
+						<th>Descripcion</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="comentario : ${comentarios}">
+
+						<td th:text="${comentario.id}">1</td>
+						<td th:text="${comentario.hPublicacion}">HAMP</td>
+						<td th:text="${comentario.descripcion}">HAMP</td>
+						
+						<td><a th:href="@{'/registro/comentario'}"
+								class="btn btn-primary">Responder</a></td>
+								
+						<td><a th:href="@{'/comentarios/delete/' + ${comentario.id}}"
+						class="btn btn-danger">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+	<th:block th:include="fragments/scripts"></th:block>
+	<th:block th:include="fragments/footer"></th:block>
+
+</body>
+</html>

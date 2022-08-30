@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<th:block th:include="fragments/head"></th:block>
+<meta charset="UTF-8">
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+
+	<div class="container">
+<br></br>
+		<div class="card">
+			<div class="card-header">Listado de retos</div>
+			<div class="card-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+
+							<th scope="col">Nombre</th>
+							<th scope="col">Nota</th>
+							<th scope="col">Fecha limite</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="reto:${retos}">
+							<td th:text="${reto.nombre}">Mark</td>
+							<td th:text="${reto.nota}">@mdo</td>
+							<td th:text="${reto.fechaLimite}">@mdo</td>
+							<td><a th:href="@{'/lista/preguntas/opciones/'+ ${reto.id}}"
+								class="btn btn-success">Ver</a></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br></br>
+	</div>
+
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>

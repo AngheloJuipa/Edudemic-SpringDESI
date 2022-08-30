@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="fragments/head"></th:block>
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+
+	<div class="container">
+
+
+		<div class="card">
+			<div class="card-header">Foros</div>
+			<div class="card-body">
+			
+			<form th:action="@{/foros/buscar}" method="post" th:object="${foro}" class="form-inline" >
+					<div class="form-group">
+						<label for="buscar"></label> 
+						<input
+							type="text" class="form-control" id="buscar"
+							th:field="*{titulo}" 
+							required="required"
+							placeholder="Buscar foro"> 
+					</div>
+					
+					<button type="submit" class="btn btn-primary">
+						<i class="fa fa-search" aria-hidden="true"></i> 
+					</button>
+			</form>
+			
+			<table class="table table-striped">	
+  <thead>
+    <tr>
+      
+      <th scope="col">Titulo</th>
+      <th scope="col">Fecha de Publicacion</th>
+      <th scope="col">Nombre Estudiante</th>
+      <th scope="col">Apellido Estudiante</th>
+      <th scope="col">Descripcion</th>
+      
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="foro:${foros}">
+      <td th:text="${foro.titulo}">Mark</td>
+        <td th:text="${foro.fPublicacion}">Otto</td>
+        <td th:text="${foro.estudiante.nombres}">@mdo</td>
+        <td th:text="${foro.estudiante.apellidos}">@mdo</td>
+      <td th:text="${foro.descripcion}">Otto</td>
+    
+      
+   
+      
+      
+      <td><a th:href="@{'/registro/comentario'}"
+								class="btn btn-primary">Responder</a></td>
+								
+		<td><a th:href="@{'/listar/comentario'}"
+								class="btn btn-primary">Respuestas</a></td>
+								
+		<td><a th:href="@{'/foros/delete/' + ${foro.id}}"
+		class="btn btn-danger">Eliminar</a></td>
+	
+				
+    </tr>
+   
+  </tbody>
+</table>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<th:block th:include="fragments/head"></th:block>
+<body>
+	<th:block th:include="fragments/navbar"></th:block>
+
+	<div class="container">
+		<form th:action="@{/comentarios}" th:object="${comentario}" method="POST">
+			<h1>COMENTARIO</h1>
+
+			<div class="form-outline mb-4">
+				<input type="text" id="form6Example3" class="form-control"
+					name="hPublicacion" th:field="*{hPublicacion}" /> <label class="form-label"
+					for="form6Example3">Hora Publicacion</label> <small
+					class="form-text text-danger"
+					th:if="${#fields.hasErrors('hPublicacion')}" th:errors="*{hPublicacion}"></small>
+			</div>
+			
+			<div class="form-outline mb-4">
+				<label class="form-label" for="lista">Foro</label> <select
+					class="custom-select custom-select-sm " name="foro" id="lista">
+					<option th:each="foro :${listaForos}"
+						th:value="${foro.id}" th:text="${foro.titulo}" />
+				</select>
+			</div>
+
+			<div class="form-outline mb-4">
+				<input type="text" id="form6Example3" class="form-control"
+					name="descripcion" th:field="*{descripcion}" /> <label
+					class="form-label" for="form6Example3">Descripcion</label> <small
+					class="form-text text-danger"
+					th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
+			</div>
+					<div th:if="${mensaje3}" class="alert alert-danger">
+					<p th:text="${mensaje3}"> </p> </div>
+
+
+			<!-- Submit button -->
+			<button type="submit" class="btn btn-primary btn-block mb-4">Añadir</button>
+
+			<br></br>
+		</form>
+
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>
