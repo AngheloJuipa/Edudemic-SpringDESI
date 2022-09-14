@@ -19,7 +19,7 @@
                             <th scope="col">Hora de Inicio</th>
                             <th scope="col">Hora de Fin</th>
                             <th scope="col">Fecha</th>
-                           <th scope="col">Materiales</th>
+                          
                             
                         </tr>
                     </thead>
@@ -30,8 +30,7 @@
                             <td th:text="${inscripcion.mentoria.horaI}">@mdo</td>
                             <td th:text="${inscripcion.mentoria.horaF}">@mdo</td>
                             <td th:text="${inscripcion.mentoria.fecha}">@mdo</td>
-							<td><a th:href="@{'/lista/mentoria/material/'+ ${inscripcion.mentoria.id}}"
-                                class="btn btn-success">Materiales</a></td>
+							
                         </tr>
 
                     </tbody>

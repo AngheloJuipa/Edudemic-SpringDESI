@@ -17,19 +17,17 @@
 
 							<th scope="col">Descripción</th>
 							<th scope="col">Profesor</th>
-							<th scope="col">Retos en la mentoria</th>
-							<th scope="col">Materiales en la mentoria</th>
+							
+							
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="mentoria:${mentorias}">
 							<td th:text="${mentoria.descripcion}">Mark</td>
 							<td th:text="${mentoria.profesor.nombres}">@mdo</td>
-							<td><a th:href="@{'/lista/reto/nota/'+ ${mentoria.id}}"
-								class="btn btn-success">Ver</a></td>
+							
 								
-							<td><a th:href="@{'/lista/mentoria/material/'+ ${mentoria.id}}"
-								class="btn btn-success">Materiales</a></td>
+							
 							
 						</tr>
 

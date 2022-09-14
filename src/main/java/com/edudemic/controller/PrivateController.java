@@ -12,23 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.edudemic.entities.Usuario;
 import com.edudemic.repository.UsuarioRepository;
 import com.edudemic.service.EstudianteService;
-import com.edudemic.service.LibroService;
+
 import com.edudemic.service.ProfesorService;
-import com.edudemic.service.VideoService;
+
 
 @Controller
 @RequestMapping("/private")
 public class PrivateController {
-	@Autowired
-	LibroService libroService;
+	
 	@Autowired
 	ProfesorService profesorService;
 	@Autowired
 	EstudianteService estudianteService;
 	@Autowired
 	UsuarioRepository usuarioRepository;
-	@Autowired
-	VideoService videoService;
+	
 	@GetMapping("/index")
 	public String indx(Authentication auth, HttpSession session, Model model) 
 	{
@@ -39,10 +37,10 @@ public class PrivateController {
 			user.setPassword(null);
 			session.setAttribute("usuario", user);
 		}
-		model.addAttribute("libros", libroService.getAllLibros());
+	
 		model.addAttribute("estudiantes", estudianteService.listaEstudiantes());
 		model.addAttribute("profesores", profesorService.listarProfesor());
-		model.addAttribute("videos",videoService.getAllVideos());
+		
 
 		return "index";
 	}

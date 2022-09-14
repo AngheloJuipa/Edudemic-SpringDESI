@@ -13,33 +13,15 @@
 			<li class="nav-item active"><a class="nav-link"
 				th:href="@{/admin}">Inicio <span class="sr-only">(current)</span>
 			</a></li>
-			<div sec:authorize="hasRole('ROLE_STUDENT')">
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/lista/libro/estudiante}">Libros</a></li>
-			</div>
-			<div sec:authorize="hasRole('ROLE_STUDENT')">
-
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/list/video/estudiante}">Videos</a></li>
-			</div>
-			<div sec:authorize="hasRole('ROLE_STUDENT')">
-
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/listar/revista/estudiante}">Revistas</a></li>
-			</div>
+			
+			
+			
 			
 			<div sec:authorize="hasRole('ROLE_STUDENT')">
 
 				<li class="nav-item"><a class="nav-link"
 					th:href="@{/listar/mentoria/estudiante}">Mentorias</a></li>
 			</div>
-			
-			<div sec:authorize="hasRole('ROLE_STUDENT')">
-
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/registrar/calificacionProfesor}">Calificar</a></li>
-			</div>
-			
 			
 
 			<div sec:authorize="hasRole('ROLE_COLEGIO')">
@@ -78,56 +60,7 @@
 						<a class="dropdown-item" th:href="@{/lista/curso}">Lista</a>
 					</div></li>
 			</div>
-			<div sec:authorize="hasRole('ROLE_COLEGIO')">
-
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Categoria </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/registro/categoria}">Registrar</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/lista/categoria}">Mantenimiento</a>
-					</div></li>
-			</div>
-			<div sec:authorize="hasRole('ROLE_COLEGIO')">
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Revistas </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/registro/revista}">Registrar</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/listar/revista}">Lista</a>
-					</div></li>
-			</div>
-			<div sec:authorize="hasRole('ROLE_COLEGIO')">
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Libros </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/registro/libro}">Registrar</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/listar/libro}">Lista</a>
-					</div></li>
-			</div>
-			<div sec:authorize="hasRole('ROLE_COLEGIO')">
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Videos </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/registro/video}">Registrar</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/list/video}">Lista</a>
-					</div></li>
-
-			</div>
+			
 
             <div sec:authorize="hasRole('ROLE_STUDENT')">
 
@@ -151,20 +84,7 @@
 							de mentorias</a>
 					</div></li>
 			</div>
-			<div sec:authorize="hasRole('ROLE_PROFESOR')">
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Retos </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/registro/reto}">Registrar</a>
-						<a class="dropdown-item" th:href="@{/lista/reto}">Lista</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/registro/pregunta}">Registrar
-							pregunta</a> 
-					</div></li>
-			</div>
+			
 			<div sec:authorize="hasRole('ROLE_PROFESOR')">
 
 				<li class="nav-item dropdown"><a
@@ -179,33 +99,7 @@
 					</div></li>
 			</div>
 			
-			<div sec:authorize="hasRole('ROLE_PROFESOR')">
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Materiales </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/registro/material}">Registrar</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/listar/material}">Lista</a>
-						<div class="dropdown-divider"></div>
-					</div></li>
-			</div>
-
-			<div sec:authorize="hasRole('ROLE_STUDENT')">
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Foro </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/registro/foro}">Registrar</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/listar/foro}">Foros</a>
-					</div></li>
-			</div>
-
+			
 
 
 			<li class="nav-item active"><a class="nav-link font-italic">Bienvenido
