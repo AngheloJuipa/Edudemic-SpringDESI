@@ -19,8 +19,6 @@
                             <th scope="col">Hora de Inicio</th>
                             <th scope="col">Hora de Fin</th>
                             <th scope="col">Fecha</th>
-                          
-                            
                         </tr>
                     </thead>
                     <tbody>
@@ -30,17 +28,13 @@
                             <td th:text="${inscripcion.mentoria.horaI}">@mdo</td>
                             <td th:text="${inscripcion.mentoria.horaF}">@mdo</td>
                             <td th:text="${inscripcion.mentoria.fecha}">@mdo</td>
-							
                         </tr>
-
                     </tbody>
                 </table>
             </div>
         </div>
         <br></br>
     </div>
-
     <th:block th:include="fragments/footer"></th:block>
     <th:block th:include="fragments/scripts"></th:block>
-
 </body>
