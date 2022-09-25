@@ -11,79 +11,73 @@ import com.edudemic.repository.MentoriaRepository;
 
 
 @Service
-public class MentoriaService {
-	
-	
+public class MentoriaService 
+{
+	//editado x joao
 	private MentoriaRepository mentoriaRepository;
-	//private RetoService retoService;
 	private InscripcionService inscripcionService;
+	
 	public MentoriaService(MentoriaRepository mentoriaRepository,InscripcionService inscripcionService) 
 	{
 		this.mentoriaRepository=mentoriaRepository;
-		//this.retoService=retoService;
 		this.inscripcionService=inscripcionService;
 	}
+	
 	public Mentoria registrarMentoria(Mentoria m) 
 	{
 		return mentoriaRepository.save(m);
 	}
+	
 	public List<Mentoria> listarMentoria() 
 	{
 		return mentoriaRepository.findAll();
 	}
+	
+	public void borrarMentoria(Long id)
+	{
+		for(int i=0; i<inscripcionService.listarInscripcion().size();i++)
+		{
+			if(inscripcionService.listarInscripcion().get(i).getMentoria().getId()==id)
+			{
+				inscripcionService.borrarInscripcion(inscripcionService.listarInscripcion().get(i).getId());
+			}
+		}
+		mentoriaRepository.deleteById(id);
+	}
+	
 	public Mentoria mentoriaObjeto(Long id) 
 	{
 		return mentoriaRepository.objetoM(id);
 	}
-	public Mentoria getMentoriaById(Long id) {
+	
+	public Mentoria getMentoriaById(Long id) 
+	{
 		return mentoriaRepository.findById(id).get();
 	}
-	/*public List<Mentoria> otraLista() 
+	
+	public List<Mentoria> listaMentoriaxProfesor(Long id)
 	{
-		List<Mentoria> listaM = new ArrayList<>();
-		List<Mentoria> listaO = mentoriaRepository.findAll();
-			for(int j=0;j<retoService.listarReto().size();j++) 
-			{
-
-				if(retoService.listarReto().get(j).getMentoria().getId()!=mentoriaRepository.findAll().get(j).getId()) 
-				{
-
-				}else 
-				{
-					listaM.add(mentoriaRepository.findAll().get(j));
-
-				}
-
-			}
-			listaO.removeAll(listaM);
-		return listaO;
-	}*/
-	public List<Mentoria> buscarMentoria(String fecha)
-	{
-		return mentoriaRepository.findByFechaContainingIgnoreCase(fecha);
+		return mentoriaRepository.listaMentoriasxProfesor(id);
 	}
+	
+	//SHOW EVERY MENTORIA WHICH DOES NOT BELONG TO THE INSCRIPCIONES TABLE 
 	public List<Mentoria> mentoriasInscripciones() 
 	{
 		List<Mentoria> listaM = new ArrayList<>();
 		List<Mentoria> listaO = mentoriaRepository.findAll();
-			for(int j=0;j<inscripcionService.listarInscripcion().size();j++) 
+		for(int j=0;j<inscripcionService.listarInscripcion().size();j++) 
+		{
+			
+			if(inscripcionService.listarInscripcion().get(j).getMentoria().getId()!=mentoriaRepository.findAll().get(j).getId()) 
 			{
-
-				if(inscripcionService.listarInscripcion().get(j).getMentoria().getId()!=mentoriaRepository.findAll().get(j).getId()) 
-				{
-
-				}else 
-				{
-					listaM.add(mentoriaRepository.findAll().get(j));
-
-				}
-
+				
+			}else 
+			{
+				listaM.add(mentoriaRepository.findAll().get(j));
 			}
-			listaO.removeAll(listaM);
+			
+		}
+		listaO.removeAll(listaM);
 		return listaO;
-	}
-	public List<Mentoria> listaMentoriaxProfesor(Long id)
-	{
-		return mentoriaRepository.listaMentoriasxProfesor(id);
 	}
 }
