@@ -28,4 +28,10 @@ public class ProfesorService {
 	{
 		return profesorRepository.findAll();
 	}
+	
+	//lo agregue, no borres chicho
+	public Profesor findById(Long id)
+	{
+		return profesorRepository.findById(id).get();
+	}
 }
