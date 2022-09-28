@@ -7,33 +7,40 @@ import org.springframework.stereotype.Service;
 
 import com.edudemic.entities.Inscripcion;
 import com.edudemic.entities.Profesor;
+import com.edudemic.entities.Auxiliar;
+import com.edudemic.entities.ReporteCurso;
+import com.edudemic.entities.Auxiliar;
+import com.edudemic.entities.Curso;
+import com.edudemic.entities.ReporteGrado;
 import com.edudemic.entities.ReporteMentoria;
 import com.edudemic.repository.InscripcionRepository;
 import com.edudemic.repository.ProfesorRepository;
-import com.edudemic.entities.Auxiliar;
+import com.edudemic.repository.CursoRepository;
+
 
 @Service
-public class ReporteMentoriaService {
-
-	private ProfesorRepository profesorRepository;
+public class ReporteGradoService {
+	
+	
 	private InscripcionRepository inscripcionRepository;
-	public ReporteMentoriaService(ProfesorRepository profesorRepository, InscripcionRepository inscripcionRepository) 
+	public ReporteGradoService( InscripcionRepository inscripcionRepository) 
 	{
-		this.profesorRepository=profesorRepository;
+		
 		this.inscripcionRepository=inscripcionRepository;
 	}
-	public List<ReporteMentoria> reporteM()
+	
+	public List<ReporteGrado> reporteG()
 	{
-		List<Profesor> listP =  profesorRepository.findAll();
+		
 		List<Inscripcion> listM =  inscripcionRepository.findAll();
-		List<ReporteMentoria> listPM = new ArrayList<>();
-		for(int i=0; i <listP.size(); i++)
+		List<ReporteGrado> listPM = new ArrayList<>();
+		for(int i=0; i <5; i++)
 		{
-			ReporteMentoria reporteMentoria = new ReporteMentoria();
-			reporteMentoria.setProfesor(listP.get(i));	
+			ReporteGrado reporteMentoria = new ReporteGrado();
+			reporteMentoria.setGrado(i+1);	
 			for(int j=0; j<listM.size(); j++)
 			{
-				if(listM.get(j).getMentoria().getProfesor().getId()==listP.get(i).getId())
+				if(listM.get(j).getEstudiante().getId()==i+1)
 				{
 					reporteMentoria.setCantidad(reporteMentoria.getCantidad()+1);
 				}
@@ -43,7 +50,7 @@ public class ReporteMentoriaService {
 		return listPM;
 	}
 	
-	public List<ReporteMentoria> reporteFiltrado(Auxiliar auxiliar)
+	public List<ReporteGrado> reporteFiltradoGrado(Auxiliar auxiliar)
 	{
 		
 		String[] parts=auxiliar.getFechaI().split("-");
@@ -65,16 +72,17 @@ public class ReporteMentoriaService {
 		
 		
 		
-		
-		List<Profesor> listP =  profesorRepository.findAll();
 		List<Inscripcion> listM =  inscripcionRepository.findAll();
-		List<ReporteMentoria> listPM = new ArrayList<>();
-		for(int i=0; i <listP.size(); i++)
-		{
-			ReporteMentoria reporteMentoria = new ReporteMentoria();
-			reporteMentoria.setProfesor(listP.get(i));	
+		List<ReporteGrado> listPM = new ArrayList<>();
+		for(int i=0; i <5; i++)
+		{	
+			
+			ReporteGrado reporteMentoria = new ReporteGrado();
+			reporteMentoria.setGrado(i+1);	
 			for(int j=0; j<listM.size(); j++)
 			{
+				
+				
 				String[] partsInscripcion=listM.get(j).getMentoria().getFecha().split("-");
 				String Mpart1 = partsInscripcion[0];
 				int añoM = Integer.parseInt(Mpart1);
@@ -82,32 +90,35 @@ public class ReporteMentoriaService {
 				int mesM = Integer.parseInt(Mpart2);
 				String Mpart3 = partsInscripcion[2];
 				int diaM = Integer.parseInt(Mpart3);
-						
-			
-			
-	if(añoM>=añoI && añoM<=añoF)
-		{
-			if(mesM>=mesI && mesM<=mesF)
-			{  
-			  	if(diaM>=diaI && diaM<=diaF)
-			  	{
-			    	if(listM.get(j).getMentoria().getProfesor().getId()==listP.get(i).getId())
-				    {
+				
+				
+				if(añoM>=añoI && añoM<=añoF)
+				{
+					if(mesM>=mesI && mesM<=mesF)
+					{  
+					  	if(diaM>=diaI && diaM<=diaF)
+					  	{
+				if(listM.get(j).getEstudiante().getId()==i+1)
+				{
 					reporteMentoria.setCantidad(reporteMentoria.getCantidad()+1);
-			     	}
-			  	}
-			}
-		}
-				   		
+				}
+					  	}
+					}
+				}
+				
+				
+				
+				
 			}
 			listPM.add(reporteMentoria);
 		}
 		return listPM;
 		
-	
 	}
 	
-	public int ValidarFecha(Auxiliar auxiliar) {
+	
+	
+public int ValidarFecha(Auxiliar auxiliar) {
 		
 		int validar=0;
 		String[] parts=auxiliar.getFechaI().split("-");
@@ -152,6 +163,5 @@ public class ReporteMentoriaService {
 		return validar;
 	}
 	
-	
-	
+
 }

@@ -7,33 +7,38 @@ import org.springframework.stereotype.Service;
 
 import com.edudemic.entities.Inscripcion;
 import com.edudemic.entities.Profesor;
+import com.edudemic.entities.Curso;
+import com.edudemic.entities.Auxiliar;
+import com.edudemic.entities.ReporteCurso;
 import com.edudemic.entities.ReporteMentoria;
 import com.edudemic.repository.InscripcionRepository;
 import com.edudemic.repository.ProfesorRepository;
-import com.edudemic.entities.Auxiliar;
+import com.edudemic.repository.CursoRepository;
 
 @Service
-public class ReporteMentoriaService {
+public class ReporteCursoService {
 
-	private ProfesorRepository profesorRepository;
+	
+	private CursoRepository cursoRepository;
 	private InscripcionRepository inscripcionRepository;
-	public ReporteMentoriaService(ProfesorRepository profesorRepository, InscripcionRepository inscripcionRepository) 
+	public ReporteCursoService(CursoRepository cursoRepository, InscripcionRepository inscripcionRepository) 
 	{
-		this.profesorRepository=profesorRepository;
+		this.cursoRepository=cursoRepository;
 		this.inscripcionRepository=inscripcionRepository;
 	}
-	public List<ReporteMentoria> reporteM()
+	
+	public List<ReporteCurso> reporteC()
 	{
-		List<Profesor> listP =  profesorRepository.findAll();
+		List<Curso> listP =  cursoRepository.findAll();
 		List<Inscripcion> listM =  inscripcionRepository.findAll();
-		List<ReporteMentoria> listPM = new ArrayList<>();
+		List<ReporteCurso> listPM = new ArrayList<>();
 		for(int i=0; i <listP.size(); i++)
 		{
-			ReporteMentoria reporteMentoria = new ReporteMentoria();
-			reporteMentoria.setProfesor(listP.get(i));	
+			ReporteCurso reporteMentoria = new ReporteCurso();
+			reporteMentoria.setCurso(listP.get(i));	
 			for(int j=0; j<listM.size(); j++)
 			{
-				if(listM.get(j).getMentoria().getProfesor().getId()==listP.get(i).getId())
+				if(listM.get(j).getMentoria().getProfesor().getCurso().getId()==listP.get(i).getId())
 				{
 					reporteMentoria.setCantidad(reporteMentoria.getCantidad()+1);
 				}
@@ -43,7 +48,7 @@ public class ReporteMentoriaService {
 		return listPM;
 	}
 	
-	public List<ReporteMentoria> reporteFiltrado(Auxiliar auxiliar)
+	public List<ReporteCurso> reporteFiltradoCurso(Auxiliar auxiliar)
 	{
 		
 		String[] parts=auxiliar.getFechaI().split("-");
@@ -64,15 +69,13 @@ public class ReporteMentoriaService {
 		int diaF = Integer.parseInt(Fpart3);
 		
 		
-		
-		
-		List<Profesor> listP =  profesorRepository.findAll();
+		List<Curso> listP =  cursoRepository.findAll();
 		List<Inscripcion> listM =  inscripcionRepository.findAll();
-		List<ReporteMentoria> listPM = new ArrayList<>();
+		List<ReporteCurso> listPM = new ArrayList<>();
 		for(int i=0; i <listP.size(); i++)
 		{
-			ReporteMentoria reporteMentoria = new ReporteMentoria();
-			reporteMentoria.setProfesor(listP.get(i));	
+			ReporteCurso reporteMentoria = new ReporteCurso();
+			reporteMentoria.setCurso(listP.get(i));	
 			for(int j=0; j<listM.size(); j++)
 			{
 				String[] partsInscripcion=listM.get(j).getMentoria().getFecha().split("-");
@@ -82,32 +85,33 @@ public class ReporteMentoriaService {
 				int mesM = Integer.parseInt(Mpart2);
 				String Mpart3 = partsInscripcion[2];
 				int diaM = Integer.parseInt(Mpart3);
-						
-			
-			
-	if(añoM>=añoI && añoM<=añoF)
-		{
-			if(mesM>=mesI && mesM<=mesF)
-			{  
-			  	if(diaM>=diaI && diaM<=diaF)
-			  	{
-			    	if(listM.get(j).getMentoria().getProfesor().getId()==listP.get(i).getId())
-				    {
+				
+				
+				if(añoM>=añoI && añoM<=añoF)
+				{
+					if(mesM>=mesI && mesM<=mesF)
+					{  
+					  	if(diaM>=diaI && diaM<=diaF)
+					  	{
+				
+				if(listM.get(j).getMentoria().getProfesor().getCurso().getId()==listP.get(i).getId())
+				{
 					reporteMentoria.setCantidad(reporteMentoria.getCantidad()+1);
-			     	}
-			  	}
-			}
-		}
-				   		
+				}
+					  	}
+					}
+				}
+				
 			}
 			listPM.add(reporteMentoria);
 		}
 		return listPM;
-		
+	
 	
 	}
 	
-	public int ValidarFecha(Auxiliar auxiliar) {
+	
+public int ValidarFecha(Auxiliar auxiliar) {
 		
 		int validar=0;
 		String[] parts=auxiliar.getFechaI().split("-");
@@ -151,7 +155,5 @@ public class ReporteMentoriaService {
 		
 		return validar;
 	}
-	
-	
 	
 }

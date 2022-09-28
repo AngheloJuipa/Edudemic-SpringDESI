@@ -9,7 +9,7 @@
 	
 	<div class="container">
 	 <div class="row justify-content-center">
-	 <form th:action="@{/reporte/lista}" th:object="${auxiliar}" method="POST" class="form-row">
+	 <form th:action="@{/reporte/lista2}" th:object="${auxiliar}" method="POST" class="form-row">
 	  
 	   <div class="col" style="max-width:25%;">
 	    <label class="colm-md-3">Fecha de Inicio  </label>
@@ -43,6 +43,9 @@
 	     <button type="button" class="close" data-dismiss="alert">&times</button>
 	</div>
 	
+	
+	
+	
 	<div class="card" style="max-width: 100%;">
 		<div class="card-header">Mentorias</div>
 		<div class="card-body">
@@ -50,18 +53,17 @@
 			<table class="table table-striped">
 					<thead>
 						<tr>
-
-							<th scope="col">Profesor</th>
+						<th scope="col">ID</th>
 							<th scope="col">Curso</th>
 							<th scope="col">Cantidad</th>
 
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="reporteMentoria:${reporteMentorias}">
-							<td th:text="${reporteMentoria.profesor.nombres}"></td>
-							<td th:text="${reporteMentoria.profesor.curso.nombre}"></td>
-							<td th:text="${reporteMentoria.cantidad}"></td>				
+						<tr th:each="reporteCurso:${reporteCursos}">
+						    <td th:text="${reporteCurso.curso.id}"></td>
+							<td th:text="${reporteCurso.curso.nombre}"></td>
+							<td th:text="${reporteCurso.cantidad}"></td>				
 						</tr>
 
 					</tbody>
