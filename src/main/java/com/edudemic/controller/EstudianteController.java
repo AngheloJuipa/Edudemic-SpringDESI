@@ -85,7 +85,31 @@ public class EstudianteController {
 	@GetMapping("/estudiante/guardar")
 	public String guardarEstudiante(@Validated @ModelAttribute("estudiante") Estudiante estudiante,BindingResult result,Model model) {
 
-			try {
+		if(estudianteService.ValidarCamposVacios(estudiante)==1||result.hasErrors())
+	     {
+			if(estudianteService.ValidarCamposVacios(estudiante)==1)
+			model.addAttribute("error", "Debe completar todos los campos");
+			
+			/*if(estudianteService.ValidarContra(estudiante)==1)
+				model.addAttribute("error2", "Contraseña no es válida");
+			
+			if(estudianteService.ValidarEdad(estudiante)==1)
+				model.addAttribute("error3", "Edad inválida");
+			
+			if(usuarioService.validar(estudiante.getDni()))
+			{
+				model.addAttribute("error4", "El usuario ya existe");
+			}*/
+			
+			estudiante = estudianteService.buscarPorId(estudiante.getId());
+			model.addAttribute("estudiante", estudiante);
+			estudianteSeleccionado=estudiante;
+			return "estudiante/editarE";
+			
+		}
+		
+		
+		else {
 	    			estudianteSeleccionado.setId(estudiante.getId());
 	    			estudianteSeleccionado.setApellidos(estudiante.getApellidos());
 	    			estudianteSeleccionado.setDni(estudiante.getDni());
@@ -96,12 +120,14 @@ public class EstudianteController {
 	    			estudianteService.editarEstudiante(estudianteSeleccionado);
 				    model.addAttribute("estudiante",estudianteSeleccionado);
 	    			model.addAttribute("mensaje", "El estudiante se modificó correctamente");
+	    			estudiante = estudianteService.buscarPorId(estudiante.getId());
+	    			model.addAttribute("estudiante", estudiante);
+	    			estudianteSeleccionado=estudiante;
+	    			
+	    			return "estudiante/editarE";
 
-	        }catch (Exception e) {
-	        	System.out.println(e.getMessage());
-				model.addAttribute("mensaje", "El estudiante no se modificó correctamente");
-	        }
-		return "estudiante/editarE";
+		}
+		
 	
 	}
 }
