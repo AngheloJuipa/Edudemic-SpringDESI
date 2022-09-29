@@ -49,12 +49,38 @@ public class ProfesorController {
 		return "profesor/registroP";
 	}
 	@PostMapping("/profesores")
-	public String registrarProfesor(@Valid @ModelAttribute("profesor") Profesor profesor, BindingResult result) 
+	public String registrarProfesor(@Valid @ModelAttribute("profesor") Profesor profesor, BindingResult result, Model model) 
 	{
-		if(result.hasErrors() || usuarioService.validar(profesor.getDni())) 
+		/*if(result.hasErrors() || usuarioService.validar(profesor.getDni())) 
 		{
 			return "redirect:/registro/profesor";
-		}else 
+		}*/
+		
+
+		if(profesorService.ValidarCamposVacios(profesor)==1||result.hasErrors()|| usuarioService.validar(profesor.getDni()))
+		{
+			if(profesorService.ValidarCamposVacios(profesor)==1)
+				model.addAttribute("error", "Debe completar todos los campos");
+				
+				if(profesorService.ValidarContra(profesor)==1)
+					model.addAttribute("error2", "Contraseña no es válida");
+				
+				if(profesorService.ValidarEdad(profesor)==1)
+					model.addAttribute("error3", "Edad inválida");
+				
+				if(usuarioService.validar(profesor.getDni()))
+				{
+					model.addAttribute("error4", "El usuario ya existe");
+				}
+			
+				this.listaCursos = cursoService.listarCurso();
+
+				model.addAttribute("profesor",profesor);
+				model.addAttribute("listaCursos",listaCursos);
+				model.addAttribute("roles", rolService.listarRoles());
+				return "profesor/registroP";
+		}
+		else 
 		{
 			List<Rol> nuevoList = rolService.listarStudent("ROLE_PROFESOR");
 			profesor.setRol(nuevoList.get(0));

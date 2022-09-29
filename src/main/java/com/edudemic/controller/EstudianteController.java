@@ -1,5 +1,6 @@
 package com.edudemic.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -40,26 +41,66 @@ public class EstudianteController {
 	@GetMapping("/registro/estudiante")
 	public String registrarEstudianteForm(Model model) 
 	{
+		List<String>listagrado=new ArrayList<String>();
+		listagrado.add("1");
+		listagrado.add("2");
+		listagrado.add("3");
+		listagrado.add("4");
+		listagrado.add("5");
+		
+		
 		Estudiante estudiante = new Estudiante();
 		model.addAttribute("estudiante",estudiante);
 		model.addAttribute("roles", rolService.listarRoles());
+		model.addAttribute("listagrado", listagrado);
 
 		return "estudiante/registroE";
 	}
 	@PostMapping("/estudiantes")
-	public String registrarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result) 
+	public String registrarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result, Model model) 
 	{
-		if(result.hasErrors() || usuarioService.validar(estudiante.getDni())) 
-		{
-			return "redirect:/registro/estudiante";
-		}else 
+			
+		
+		if(estudianteService.ValidarCamposVacios(estudiante)==1||result.hasErrors()||usuarioService.validar(estudiante.getDni()))
+	     {
+			if(estudianteService.ValidarCamposVacios(estudiante)==1)
+			model.addAttribute("error", "Debe completar todos los campos");
+			
+			if(estudianteService.ValidarContra(estudiante)==1)
+				model.addAttribute("error2", "Contraseña no es válida");
+			
+			if(estudianteService.ValidarEdad(estudiante)==1)
+				model.addAttribute("error3", "Edad inválida");
+			
+			if(usuarioService.validar(estudiante.getDni()))
+			{
+				model.addAttribute("error4", "El usuario ya existe");
+			}
+			
+			
+			List<String>listagrado=new ArrayList<String>();
+			listagrado.add("1");
+			listagrado.add("2");
+			listagrado.add("3");
+			listagrado.add("4");
+			listagrado.add("5");
+			//Estudiante estudiante2 = new Estudiante();
+			model.addAttribute("estudiante",estudiante);
+			model.addAttribute("roles", rolService.listarRoles());
+			model.addAttribute("listagrado", listagrado);
+			
+			return "estudiante/registroE";
+		}
+		
+		
+		
+	 else 
 		{
 			List<Rol> nuevoList = rolService.listarStudent("ROLE_STUDENT");
-			
 			estudiante.setRol(nuevoList.get(0));
 			estudianteService.registrarEstudiante(estudiante);
 			return "redirect:/lista/estudiante";
-		}
+	 	}
 	}
 	@GetMapping("/lista/estudiante")
 	public String listarEstudiante(Model model) {
@@ -104,4 +145,5 @@ public class EstudianteController {
 		return "estudiante/editarE";
 	
 	}
+	
 }

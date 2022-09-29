@@ -12,8 +12,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="usuarios")
@@ -23,18 +26,31 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="usu_codigo")
 	private Long id;
-	@NotEmpty(message = "Ingresar sus nombres")
+	
+	
+	//@Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
+	@Pattern(regexp = "[a-zA-Z\\s]{1,40}", message = "Nombre no válido")
 	@Column(name = "nombres", nullable = false, length = 70)
 	private String nombres;
-	@NotEmpty(message = "Ingresar sus apellidos")
+	
+	@Pattern(regexp = "[a-zA-Z\\s]{1,40}", message = "Apellido no válido")
 	@Column(name = "apellidos", nullable = false, length = 70)
 	private String apellidos;
+	
+	//@Max(22)
+	//@Min(11)
 	private int edad;
-	@Size(min = 8, max = 8)
-	@NotEmpty(message = "Ingresar su dni")
+	
+	//@Size(min = 8, max = 8)
+	@Pattern(regexp = "[0-9]{8}", message = "DNI no es válido")
 	@Column(name = "dni", nullable = false, length = 8)
 	private String dni;
+	
+	//@NotEmpty(message = "Ingresar Password")
+	
+	//@Pattern(regexp = "[a-zA-Z0-9]", message = "Contraseña no es válida")
 	private String password;
+	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "rol_id")
 	private Rol rol;

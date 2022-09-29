@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
+
 
 @Entity(name="estudiantes")
 @PrimaryKeyJoinColumn(referencedColumnName = "usu_codigo")
