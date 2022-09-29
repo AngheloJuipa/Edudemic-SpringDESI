@@ -22,19 +22,19 @@ public class Mentoria
 	@JoinColumn(name = "profesor_id", nullable = false)
 	private Profesor profesor;
 
-	@NotEmpty(message = "Selecciones una fecha")
+	@NotEmpty(message = "La fecha es incorrecta")
 	@Column(name = "fecha", nullable = false)
 	private String fecha;
 
-	@Size(max = 500, message = "La descripcion no puede contener más de 500 caracteres")
+	@Size(max = 500, message = "La descripción es incorrecta")
 	@Column(name = "descripcion", nullable = true, length = 500)
 	private String descripcion;
 	
-	@NotEmpty(message = "Selecciones una hora de inicio")
+	@NotEmpty(message = "“La hora de inicio es incorrecta")
 	@Column(name = "horaI", nullable = false)
 	private String horaI;
 	
-	@NotEmpty(message = "Selecciones una hora final")
+	@NotEmpty(message = "“La hora de fin es incorrecta")
 	@Column(name = "horaF", nullable = false)
 	private String horaF;
 	
