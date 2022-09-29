@@ -65,7 +65,7 @@ public class CursoController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return "redirect:/lista/curso";
+		return "curso/modificarC";
 	
 	}
 	
