@@ -127,18 +127,17 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Titulo</th>
-						<th>Autor</th>
-						<th>Categoria</th>
-						<th>Ver</th>
+						<th>Curso</th>
+						<th>Profesor</th>
+						<th>Fecha</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="libro : ${libros}">
+					<tr th:each="mentoria : ${mentorias}">
 
-						<td th:text="${libro.titulo}">HAMP</td>
-						<td th:text="${libro.autor}">HAMP</td>
-						<td th:text="${libro.categoria.nombre}">HAMP</td>
+						<td th:text="${mentoria.profesor.curso.nombre}">HAMP</td>
+						<td th:text="${mentoria.profesor.nombre}">HAMP</td>
+						<td th:text="${mentoria.fecha}">HAMP</td>
 					</tr>
 				</tbody>
 			</table>

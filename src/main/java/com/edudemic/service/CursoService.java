@@ -1,6 +1,7 @@
 package com.edudemic.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,18 @@ public class CursoService {
 	{
 		return cursoRepository.save(c);
 	}
-	public Curso buscarPorId(Long id) 
+	public Optional <Curso> buscarPorId(Long id) 
 	{
-		return cursoRepository.findById(id).get();
+		return cursoRepository.findById(id);
 	}
+	
+	public void deleteCursoById(Long id) {
+		cursoRepository.deleteById(id);
+	}
+	
+	public Curso modificarCurso(Curso curso) 
+    {
+        return cursoRepository.save(curso);
+    }
+	
 }

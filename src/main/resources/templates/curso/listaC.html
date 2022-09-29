@@ -24,6 +24,10 @@
 						<tr th:each="curso:${cursos}">
 							<td th:text="${curso.nombre}">Mark</td>
 							<td th:text="${curso.descripcion}">@mdo</td>
+							<td><a th:href="@{'/cursos/edit/' + ${curso.id}}"
+									class="btn btn-success">Modificar</a></td>
+							<td><a th:href="@{'/cursos/delete/' + ${curso.id}}"
+									class="btn btn-danger">Eliminar</a></td>
 						</tr>
 
 					</tbody>
