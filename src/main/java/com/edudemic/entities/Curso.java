@@ -16,8 +16,7 @@ public class Curso {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Pattern(regexp = "[^0-9]*", message = "El nombre del curso es invalido")
-	@Pattern(regexp = "[a-zA-Z0-9]+", message = "El nombre del curso es invalido")
+	@Pattern(regexp = "[a-zA-Z\\s]", message = "El nombre del curso es invalido")
 	@NotEmpty( message = "El nombre del curso es invalido")
 	@Size(max = 25, message = "El nombre del curso es invalido")
 	@Column(name = "nombre", nullable = false, length = 25)
