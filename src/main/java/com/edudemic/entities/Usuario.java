@@ -33,7 +33,7 @@ public class Usuario {
 	@Column(name = "nombres", nullable = false, length = 70)
 	private String nombres;
 	
-	@Pattern(regexp = "[a-zA-Z\\s]{1,40}", message = "Apellido no válido")
+	@Pattern(regexp = "[a-zA-Z\\s]{1,40}", message = "Apellidos no válido")
 	@Column(name = "apellidos", nullable = false, length = 70)
 	private String apellidos;
 	
